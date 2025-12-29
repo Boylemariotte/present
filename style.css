@@ -1,0 +1,265 @@
+:root {
+    --primary-color: #ff8fa3;
+    --secondary-color: #ffccd5;
+    --accent-color: #c9184a;
+    --text-color: #590d22;
+    --glass-bg: rgba(255, 255, 255, 0.7);
+    --glass-border: rgba(255, 255, 255, 0.8);
+}
+
+body,
+html {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    overflow: hidden;
+    /* For immersion */
+    font-family: 'Montserrat', sans-serif;
+}
+
+/* Backgrounds */
+.background-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: url('assets/bg.png') no-repeat center center/cover;
+    z-index: -2;
+    filter: blur(3px) brightness(0.9);
+    transform: scale(1.1);
+    /* Slight zoom for parallax effect if added later */
+}
+
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 0%, rgba(255, 204, 213, 0.4) 100%);
+    z-index: -1;
+}
+
+/* Main Layout */
+.content-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+/* Glassmorphism Card */
+.card {
+    background: var(--glass-bg);
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    border: 1px solid var(--glass-border);
+    border-radius: 20px;
+    padding: 3rem;
+    text-align: center;
+    max-width: 500px;
+    width: 100%;
+    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.2);
+    position: relative;
+    overflow: hidden;
+}
+
+/* Typography */
+h1 {
+    font-family: 'Dancing Script', cursive;
+    color: var(--accent-color);
+    font-size: 3.5rem;
+    margin-bottom: 1rem;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.dedication-text p {
+    font-size: 1.1rem;
+    line-height: 1.6;
+    color: var(--text-color);
+    margin-bottom: 1rem;
+}
+
+.dedication-text .highlight {
+    font-family: 'Playfair Display', serif;
+    font-weight: bold;
+    font-size: 1.5rem;
+    color: var(--accent-color);
+    margin-top: 1.5rem;
+}
+
+/* Hero Image */
+.hero-flower {
+    width: 150px;
+    height: auto;
+    filter: drop-shadow(0 10px 15px rgba(0, 0, 0, 0.2));
+    margin-bottom: 1.5rem;
+    transition: transform 0.3s ease;
+}
+
+.hero-flower:hover {
+    transform: scale(1.1) rotate(5deg);
+}
+
+/* Button */
+#love-btn {
+    background: linear-gradient(45deg, var(--primary-color), var(--accent-color));
+    border: none;
+    padding: 12px 30px;
+    color: white;
+    font-size: 1.1rem;
+    border-radius: 50px;
+    cursor: pointer;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 600;
+    box-shadow: 0 4px 15px rgba(201, 24, 74, 0.4);
+    transition: all 0.3s ease;
+    margin-top: 1rem;
+}
+
+#love-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 20px rgba(201, 24, 74, 0.6);
+}
+
+/* Animations */
+.fade-in-up {
+    opacity: 0;
+    transform: translateY(20px);
+    animation: fadeInUp 1s ease forwards;
+}
+
+.delay-1 {
+    animation-delay: 0.3s;
+}
+
+.delay-2 {
+    animation-delay: 0.6s;
+}
+
+.delay-3 {
+    animation-delay: 0.9s;
+}
+
+@keyframes fadeInUp {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Petals */
+.petal {
+    position: absolute;
+    top: -50px;
+    background-image: url('assets/flower.png');
+    /* Using the same flower but small */
+    background-size: contain;
+    background-repeat: no-repeat;
+    opacity: 0.7;
+    z-index: 0;
+    pointer-events: none;
+    animation: fall linear infinite;
+}
+
+@keyframes fall {
+    to {
+        transform: translateY(110vh) rotate(720deg);
+    }
+}
+
+/* Modal */
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.4);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 100;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+}
+
+.modal.visible {
+    opacity: 1;
+    pointer-events: all;
+}
+
+.letter-content {
+    background: #fdf6e3;
+    padding: 3rem;
+    border-radius: 5px;
+    text-align: left;
+    max-width: 500px;
+    width: 90%;
+    position: relative;
+    transform: scale(0.8);
+    transition: transform 0.3s cubic-bezier(0.18, 0.89, 0.32, 1.28);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    overflow: hidden;
+}
+
+.modal.visible .letter-content {
+    transform: scale(1) rotate(-2deg);
+}
+
+.letter-content h2 {
+    font-family: 'Dancing Script', cursive;
+    color: var(--accent-color);
+    text-align: center;
+    font-size: 2.5rem;
+    margin-bottom: 2rem;
+    border-bottom: 2px dashed var(--secondary-color);
+    padding-bottom: 1rem;
+}
+
+.letter-body {
+    font-family: 'Dancing Script', cursive;
+    font-size: 1.4rem;
+    color: #4a4a4a;
+    line-height: 1.8;
+}
+
+.letter-body p {
+    margin-bottom: 1.5rem;
+}
+
+.signature {
+    text-align: right;
+    margin-top: 2rem;
+    font-weight: bold;
+    color: var(--accent-color);
+}
+
+.snoopy-img {
+    position: absolute;
+    bottom: -10px;
+    left: -10px;
+    width: 150px;
+    height: auto;
+    z-index: 10;
+    transform: rotate(10deg);
+}
+
+
+.close-btn {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    font-size: 2rem;
+    cursor: pointer;
+    color: var(--text-color);
+}
+
+.hidden {
+    display: none;
+    /* Helper for JS toggle if needed, but opacity handles transition */
+}
