@@ -12,7 +12,7 @@ html {
     margin: 0;
     padding: 0;
     height: 100%;
-    overflow: hidden;
+    overflow-x: hidden;
     /* For immersion */
     font-family: 'Montserrat', sans-serif;
 }
@@ -46,7 +46,7 @@ html {
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh;
+    min-height: 100vh;
     padding: 20px;
     box-sizing: border-box;
 }
@@ -262,4 +262,30 @@ h1 {
 .hidden {
     display: none;
     /* Helper for JS toggle if needed, but opacity handles transition */
+}
+
+/* Responsiveness */
+@media (max-width: 600px) {
+    .card {
+        padding: 2rem 1.5rem;
+        width: 90%;
+        margin: 20px auto;
+    }
+
+    h1 {
+        font-size: 2.5rem;
+    }
+
+    .hero-flower {
+        width: 120px;
+    }
+
+    .dedication-text p {
+        font-size: 1rem;
+    }
+
+    #love-btn {
+        padding: 10px 25px;
+        font-size: 1rem;
+    }
 }
