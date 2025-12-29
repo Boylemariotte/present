@@ -93,11 +93,12 @@ h1 {
 
 /* Hero Image */
 .hero-flower {
-    width: 150px;
+    width: 120px;
     height: auto;
     filter: drop-shadow(0 10px 15px rgba(0, 0, 0, 0.2));
     margin-bottom: 1.5rem;
     transition: transform 0.3s ease;
+    will-change: transform;
 }
 
 .hero-flower:hover {
@@ -277,7 +278,7 @@ h1 {
     }
 
     .hero-flower {
-        width: 120px;
+        width: 80px;
     }
 
     .dedication-text p {
