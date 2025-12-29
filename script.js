@@ -4,6 +4,17 @@ document.addEventListener('DOMContentLoaded', () => {
     const modal = document.getElementById('modal-message');
     const closeModal = document.querySelector('.close-btn');
 
+    const fullLetterText = `Mi querida Valerie,
+
+Prometo cuidarte y amarte como se cuida a la flor más preciada. Eres mi sol en los días grises y mi calma en la tormenta.
+
+Cada día a tu lado es un regalo que atesoro en mi corazón. Nunca olvides que mi amor por ti crece más y más con cada segundo.
+
+Eres única y especial.
+
+Con todo mi amor,
+Tu novio`;
+
     // Create falling petals
     function createPetal() {
         const petal = document.createElement('div');
@@ -43,9 +54,43 @@ document.addEventListener('DOMContentLoaded', () => {
             modal.classList.add('visible');
         });
         
-        // Confetti effect or more hearts could go here
+        // Confetti effect
         spawnHearts();
+
+        // Start typewriter
+        typeWriter();
     });
+
+    // Typewriter Effect
+    let i = 0;
+    const speed = 40; // typing speed in ms
+    let hasTyped = false;
+    
+    function typeWriter() {
+        if (hasTyped) return;
+        
+        const typeContainer = document.getElementById('typewriter-text');
+        
+        // Simple typing logic
+        function type() {
+            if (i < fullLetterText.length) {
+                // Handle line breaks
+                if (fullLetterText.charAt(i) === '\n') {
+                     typeContainer.innerHTML += '<br>';
+                } else {
+                     typeContainer.innerHTML += fullLetterText.charAt(i);
+                }
+                i++;
+                setTimeout(type, speed);
+            } else {
+                hasTyped = true;
+                // Remove cursor after typing
+                document.querySelector('.cursor').style.display = 'none';
+            }
+        }
+        
+        type();
+    }
 
     closeModal.addEventListener('click', () => {
         modal.classList.remove('visible');
@@ -69,4 +114,38 @@ document.addEventListener('DOMContentLoaded', () => {
         // Simple console log for now, or expand this for more visual flair
         console.log('Spreading love for Valerie! ❤️');
     }
+    // Interactive Hearts
+    let lastHeartTime = 0;
+    
+    function createInteractiveHeart(x, y) {
+        const now = Date.now();
+        if (now - lastHeartTime < 50) return; // Throttle
+        lastHeartTime = now;
+
+        const heart = document.createElement('div');
+        heart.classList.add('interactive-heart');
+        heart.innerText = '❤️';
+        heart.style.left = (x - 10) + 'px';
+        heart.style.top = (y - 10) + 'px';
+        
+        // Random slight variation
+        heart.style.setProperty('--tx', (Math.random() * 20 - 10) + 'px');
+        
+        document.body.appendChild(heart);
+
+        setTimeout(() => {
+            heart.remove();
+        }, 1500);
+    }
+
+    // Touch support
+    document.addEventListener('touchmove', (e) => {
+        const touch = e.touches[0];
+        createInteractiveHeart(touch.clientX, touch.clientY);
+    });
+
+    // Mouse support
+    document.addEventListener('mousemove', (e) => {
+        createInteractiveHeart(e.clientX, e.clientY);
+    });
 });

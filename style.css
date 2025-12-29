@@ -205,7 +205,19 @@ h1 {
     transform: scale(0.8);
     transition: transform 0.3s cubic-bezier(0.18, 0.89, 0.32, 1.28);
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-    overflow: hidden;
+    /* overflow: hidden; Removed to allow scrolling */
+    max-height: 85vh;
+    overflow-y: auto;
+    /* Hide scrollbar */
+    -ms-overflow-style: none;
+    /* IE and Edge */
+    scrollbar-width: none;
+    /* Firefox */
+}
+
+/* Hide scrollbar for Chrome, Safari and Opera */
+.letter-content::-webkit-scrollbar {
+    display: none;
 }
 
 .modal.visible .letter-content {
@@ -231,6 +243,86 @@ h1 {
 
 .letter-body p {
     margin-bottom: 1.5rem;
+}
+
+/* Typewriter Cursor */
+.cursor {
+    display: inline-block;
+    width: 2px;
+    height: 1.2em;
+    background-color: var(--accent-color);
+    animation: blink 0.8s infinite;
+    vertical-align: bottom;
+}
+
+@keyframes blink {
+
+    0%,
+    100% {
+        opacity: 1;
+    }
+
+    50% {
+        opacity: 0;
+    }
+}
+
+/* Polaroid Gallery */
+.polaroid-gallery {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin-top: 2rem;
+    flex-wrap: wrap;
+}
+
+.polaroid {
+    background: white;
+    padding: 10px 10px 30px 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    width: 80px;
+    height: auto;
+    transition: transform 0.3s ease;
+    text-align: center;
+}
+
+.polaroid:hover {
+    transform: scale(1.1) rotate(0deg) !important;
+    z-index: 5;
+}
+
+.polaroid img {
+    width: 100%;
+    height: 80px;
+    object-fit: cover;
+    margin-bottom: 5px;
+}
+
+.caption {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 0.6rem;
+    color: #333;
+}
+
+/* Interactive Hearts */
+.interactive-heart {
+    position: fixed;
+    pointer-events: none;
+    font-size: 1.5rem;
+    animation: floatUp 1.5s linear forwards;
+    z-index: 9999;
+}
+
+@keyframes floatUp {
+    0% {
+        transform: translateY(0) scale(1);
+        opacity: 1;
+    }
+
+    100% {
+        transform: translateY(-100px) scale(0.5);
+        opacity: 0;
+    }
 }
 
 .signature {
@@ -288,5 +380,15 @@ h1 {
     #love-btn {
         padding: 10px 25px;
         font-size: 1rem;
+    }
+
+    /* Mobile adjustments for polaroids */
+    .polaroid {
+        width: 60px;
+        padding: 5px 5px 20px 5px;
+    }
+
+    .polaroid img {
+        height: 60px;
     }
 }
